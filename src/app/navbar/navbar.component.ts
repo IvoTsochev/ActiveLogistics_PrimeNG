@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   items: MenuItem[] | undefined;
 
   ngOnInit() {
@@ -16,16 +16,18 @@ export class NavbarComponent implements OnInit {
         label: 'Home',
         routerLink: '/',
       },
-      {
-        label: 'Components',
-        icon: 'pi pi-fw pi-calendar',
-        items: [
-          {
-            label: 'Shipment-Card Component',
-            routerLink: '/shipment-card',
-          },
-        ],
-      },
     ];
+  }
+
+  activeIndex: number | null = 0;
+
+  onTabOpen(event: any) {
+    this.activeIndex = event.index;
+    console.log('Tab Opened: ', this.activeIndex);
+  }
+
+  onTabClose(event: any) {
+    this.activeIndex = null;
+    console.log('Tab Closed: ', event.index);
   }
 }
